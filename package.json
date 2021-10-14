@@ -7,6 +7,7 @@
     "start": "nodemon src/index.js"
   },
   "dependencies": {
+    "chalk": "^2.4.1",
     "validator": "^13.6.0"
   },
   "devDependencies": {
