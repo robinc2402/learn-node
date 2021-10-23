@@ -12,4 +12,9 @@ const fs = require("fs");
 const dataBuffer = fs.readFileSync("1-json.json");
 const dataJSON = dataBuffer.toString();
 const data = JSON.parse(dataJSON);
-console.log(data);
+
+data.name = "frame_window";
+data.title = "Some title text here";
+
+fs.writeFileSync("1-json.json", JSON.stringify(data));
+// console.log(data);
