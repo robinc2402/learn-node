@@ -1,7 +1,2 @@
 
 This text file was created by NodeJS;
-This text file was created by NodeJS;
-This text file was created by NodeJS;
-This text file was created by NodeJS;
-This text file was created by NodeJS;
-This text file was created by NodeJS; 
