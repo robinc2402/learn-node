@@ -1,5 +1,6 @@
 // receiving command line params
 //console.log(process.argv[2]);
+const { string } = require("yargs");
 const yargs = require("yargs");
 const notes = require("./notes-app/notes.js");
 // customising yargs version
@@ -13,8 +14,25 @@ yargs.version("0.1.0");
 yargs.command({
   command: "add",
   describe: "Add a new note",
-  handler: function () {
-    console.log("adding a new note");
+  builder: {
+    title: {
+      describe: "Note title",
+      demandOption: true,
+      type: "string"
+    },
+    body: {
+      describe: "Body of the note",
+      demandOption: true,
+      type: "string"
+    }
+  },
+  handler: function (argv) {
+    console.log(
+      "adding a new note with Title --> " +
+        argv.title +
+        " and Body --> " +
+        argv.body
+    );
   }
 });
 
@@ -37,4 +55,6 @@ yargs.command({
   }
 });
 
-console.log(yargs.argv);
+yargs.parse();
+
+//console.log(yargs.argv);
