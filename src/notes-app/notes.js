@@ -3,7 +3,7 @@ const chalk = require("chalk");
 const Table = require("cli-table");
 
 // read file data and return a JSON str
-const getNotes = function () {
+const getNotes = () => {
   const buffer = new Buffer.from(fs.readFileSync("./data.json", "utf8"));
   const notesText = buffer.toString();
   return notesText;
@@ -33,15 +33,13 @@ const loadNotes = () => {
 };
 
 // callback for Add CLI param
-const addNote = function (title, body) {
+const addNote = (title, body) => {
   // load existing notes
   const notes = loadNotes();
 
   // check if any note with same title exists?
   // if yes then collect that note in duplicateNotes array.
-  const duplicateNotes = notes.filter(function (note) {
-    return note.title === title;
-  });
+  const duplicateNotes = notes.filter((note) => note.title === title);
 
   // if duplicateNotes is having an entry
   // that means this note is a duplicate and we shouldnt save it.
@@ -64,7 +62,7 @@ const addNote = function (title, body) {
 };
 
 // remove a note
-const removeNote = function (title) {
+const removeNote = (title) => {
   const notes = loadNotes();
 
   // check if notes exists
@@ -74,9 +72,7 @@ const removeNote = function (title) {
   }
 
   // find all the notes that are NOT having title matching with the given-title.
-  const notesArr = notes.filter(function (v) {
-    return title !== v.title;
-  });
+  const notesArr = notes.filter((v) => title !== v.title);
 
   // if we found matches, then
   if (notes.length > notesArr.length) {
@@ -87,16 +83,13 @@ const removeNote = function (title) {
 };
 
 // read a note
-const readNote = function (title) {
+const readNote = (title) => {
   const notes = loadNotes();
 
-  const notesArr = notes.filter(function (v) {
-    console.log(title);
-    return v.title === title;
-  });
+  const notesArr = notes.filter((v) => v.title === title);
 
   if (notesArr.length) {
-    const noteSingleArr = notesArr.map(function (v, i) {
+    const noteSingleArr = notesArr.map((v, i) => {
       return { [v.title]: v.body };
     });
 
@@ -107,16 +100,16 @@ const readNote = function (title) {
 };
 
 // callback for List notes
-const listNotes = function () {
+const listNotes = () => {
   const notes = loadNotes();
-  const notesArr = notes.map(function (v, i) {
+  const notesArr = notes.map((v, i) => {
     return { [v.title]: v.body };
   });
   displayTable(notesArr);
 };
 
 // print table on terminal
-const displayTable = function (data) {
+const displayTable = (data) => {
   const table = new Table({
     head: ["Title", "Body"],
     colWidths: [25, 50]
