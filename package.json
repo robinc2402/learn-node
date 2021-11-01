@@ -5,6 +5,8 @@
   "main": "src/index.js",
   "dependencies": {
     "chalk": "^2.4.1",
+    "cli-table": "^0.3.6",
+    "g": "^2.0.1",
     "nodemon": "2.0.14",
     "validator": "^13.6.0",
     "yargs": "17.2.1"

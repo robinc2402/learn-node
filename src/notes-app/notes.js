@@ -65,23 +65,21 @@ const addNote = function (title, body) {
 // callback for List notes
 const listNotes = function () {
   const notes = loadNotes();
-  displayTable(notes);
-  Object.entries(notes).forEach(([k, v]) => {
-    console.log(v.title);
+  const notesArr = notes.map(function (v, i) {
+    return { [v.title]: v.body };
   });
-
-  // for(const [key, value])
+  displayTable(notesArr);
 };
 
 // print table on terminal
 const displayTable = function (data) {
-  const tbl = new Table({
-    head: ["TH 1 Title", "TH 2 Body"],
-    colWidths: [200, 400]
+  const table = new Table({
+    head: ["Title", "Body"],
+    colWidths: [25, 50]
   });
 
-  tbl.push(["First value", "Second value"], ["First value", "Second value"]);
-  console.log(tbl.toString());
+  table.push(...data);
+  console.log(table.toString());
 };
 
 module.exports = {
