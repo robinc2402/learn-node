@@ -26,7 +26,7 @@ yargs.command({
 // remove command
 yargs.command({
   command: "remove",
-  describe: "Deletes a note",
+  describe: "Removes a note",
   builder: {
     title: {
       describe: "Note title",
@@ -35,7 +35,7 @@ yargs.command({
     }
   },
   handler: function (argv) {
-    console.log("Going to delete --> " + argv["title"]);
+    notes.removeNote(argv["title"]);
   }
 });
 

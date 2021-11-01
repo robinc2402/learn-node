@@ -15,7 +15,7 @@ const saveNote = (obj) => {
 
   fs.writeFileSync("./data.json", dataStr);
 
-  console.log(chalk.green.inverse("Note saved."));
+  console.log(chalk.green.inverse("Records updated."));
   listNotes();
   return true;
 };
@@ -63,6 +63,27 @@ const addNote = function (title, body) {
   }
 };
 
+// remove a note
+const removeNote = function (title) {
+  const notes = loadNotes();
+
+  // check if notes exists
+  if (0 === notes.length) {
+    console.log(chalk.red("Nothing to delete. All notes were deleted."));
+    return false;
+  }
+
+  // find all the notes that are NOT having title matching with the given-title.
+  const notesArr = notes.filter(function (v) {
+    return title !== v.title;
+  });
+
+  // if we found matches, then
+  if (notesArr.length) {
+    saveNote(notesArr);
+  }
+};
+
 // callback for List notes
 const listNotes = function () {
   const notes = loadNotes();
@@ -86,5 +107,6 @@ const displayTable = function (data) {
 module.exports = {
   addNote: addNote,
   getNotes: getNotes,
-  listNotes: listNotes
+  listNotes: listNotes,
+  removeNote: removeNote
 };
