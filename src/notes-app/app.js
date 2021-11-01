@@ -35,7 +35,7 @@ yargs.command({
     }
   },
   handler: function (argv) {
-    console.log("Going to delete --> " + title);
+    console.log("Going to delete --> " + argv["title"]);
   }
 });
 
@@ -60,7 +60,7 @@ yargs.command({
   command: "list",
   describe: "Lists all notes",
   handler: function () {
-    console.log("Listing all notes.");
+    notes.listNotes();
   }
 });
 

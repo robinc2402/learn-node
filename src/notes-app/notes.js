@@ -1,5 +1,35 @@
 const fs = require("fs");
 const chalk = require("chalk");
+const Table = require("cli-table");
+
+// read file data and return a JSON str
+const getNotes = function () {
+  const buffer = new Buffer.from(fs.readFileSync("./data.json", "utf8"));
+  const notesText = buffer.toString();
+  return notesText;
+};
+
+// write note in file
+const saveNote = (obj) => {
+  const dataStr = JSON.stringify(obj);
+
+  fs.writeFileSync("./data.json", dataStr);
+
+  console.log(chalk.green.inverse("Note saved."));
+  return true;
+};
+
+// load notes data
+const loadNotes = () => {
+  try {
+    const dataBuffer = fs.readFileSync("./data.json");
+    const dataJSON = dataBuffer.toString();
+    const dataObj = JSON.parse(dataJSON);
+    return dataObj;
+  } catch (e) {
+    return [];
+  }
+};
 
 // callback for Add CLI param
 const addNote = function (title, body) {
@@ -32,36 +62,30 @@ const addNote = function (title, body) {
   }
 };
 
-// read file data and return a JSON str
-const getNotes = function () {
-  const buffer = new Buffer.from(fs.readFileSync("./data.json", "utf8"));
-  const notesText = buffer.toString();
-  return notesText;
+// callback for List notes
+const listNotes = function () {
+  const notes = loadNotes();
+  displayTable(notes);
+  Object.entries(notes).forEach(([k, v]) => {
+    console.log(v.title);
+  });
+
+  // for(const [key, value])
 };
 
-// write note in file
-const saveNote = (obj) => {
-  const dataStr = JSON.stringify(obj);
+// print table on terminal
+const displayTable = function (data) {
+  const tbl = new Table({
+    head: ["TH 1 Title", "TH 2 Body"],
+    colWidths: [200, 400]
+  });
 
-  fs.writeFileSync("./data.json", dataStr);
-
-  console.log(chalk.green.inverse("Note saved."));
-  return true;
-};
-
-// load notes data
-const loadNotes = () => {
-  try {
-    const dataBuffer = fs.readFileSync("./data.json");
-    const dataJSON = dataBuffer.toString();
-    const dataObj = JSON.parse(dataJSON);
-    return dataObj;
-  } catch (e) {
-    return [];
-  }
+  tbl.push(["First value", "Second value"], ["First value", "Second value"]);
+  console.log(tbl.toString());
 };
 
 module.exports = {
   addNote: addNote,
-  getNotes: getNotes
+  getNotes: getNotes,
+  listNotes: listNotes
 };
