@@ -90,14 +90,13 @@ const removeNote = (title) => {
 const readNote = (title) => {
   const notes = loadNotes();
 
-  const notesArr = notes.filter((v) => v.title === title);
+  //const notesArr = notes.filter((v) => v.title === title);
 
-  if (notesArr.length) {
-    const noteSingleArr = notesArr.map((v, i) => {
-      return { [v.title]: v.body };
-    });
+  // more efficient way of finding an item.
+  const note = notes.find((v) => v.title === title);
 
-    displayTable(noteSingleArr);
+  if (note) {
+    displayTable([{ [note.title]: note.body }]);
   } else {
     console.log(chalk.red.inverse("No note found matching this title."));
   }
