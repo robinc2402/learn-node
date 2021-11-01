@@ -1,5 +1,6 @@
 const yargs = require("yargs");
-const notesText = require("./notes.js");
+const notes = require("./notes.js");
+// const utils = require("./utils.js");
 
 // add command
 yargs.command({
@@ -17,10 +18,8 @@ yargs.command({
       type: "string"
     }
   },
-  handler: function (title, body) {
-    console.log(
-      "Going to add a note. Title --> " + title + " and Body -->" + body
-    );
+  handler: function (argv) {
+    notes.addNote(argv["title"], argv["body"]);
   }
 });
 
@@ -35,7 +34,7 @@ yargs.command({
       type: "string"
     }
   },
-  handler: function (title) {
+  handler: function (argv) {
     console.log("Going to delete --> " + title);
   }
 });
@@ -64,6 +63,8 @@ yargs.command({
     console.log("Listing all notes.");
   }
 });
+
+yargs.parse();
 
 // console.log(notesText);
 // console.log(121212);
