@@ -86,6 +86,26 @@ const removeNote = function (title) {
   }
 };
 
+// read a note
+const readNote = function (title) {
+  const notes = loadNotes();
+
+  const notesArr = notes.filter(function (v) {
+    console.log(title);
+    return v.title === title;
+  });
+
+  if (notesArr.length) {
+    const noteSingleArr = notesArr.map(function (v, i) {
+      return { [v.title]: v.body };
+    });
+
+    displayTable(noteSingleArr);
+  } else {
+    console.log(chalk.red.inverse("No note found matching this title."));
+  }
+};
+
 // callback for List notes
 const listNotes = function () {
   const notes = loadNotes();
@@ -110,5 +130,6 @@ module.exports = {
   addNote: addNote,
   getNotes: getNotes,
   listNotes: listNotes,
-  removeNote: removeNote
+  removeNote: removeNote,
+  readNote: readNote
 };

@@ -50,8 +50,8 @@ yargs.command({
       type: "string"
     }
   },
-  handler: function (title) {
-    console.log("Reading a note --> " + title);
+  handler: function (argv) {
+    notes.readNote(argv["title"]);
   }
 });
 
