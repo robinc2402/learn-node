@@ -35,7 +35,7 @@ const event2 = {
   }
 };
 // event2.printGuestList();
-
+//
 // Example3 -- real function as a property of an object
 const event3 = {
   name: "Service anniversary",
