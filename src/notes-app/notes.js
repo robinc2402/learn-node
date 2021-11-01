@@ -3,13 +3,6 @@ const chalk = require("chalk");
 const Table = require("cli-table");
 const nodemon = require("nodemon");
 
-// read file data and return a JSON str
-const getNotes = () => {
-  const buffer = new Buffer.from(fs.readFileSync("./data.json", "utf8"));
-  const notesText = buffer.toString();
-  return notesText;
-};
-
 // write note in file
 const saveNote = (obj) => {
   const dataStr = JSON.stringify(obj);
@@ -124,7 +117,6 @@ const displayTable = (data) => {
 
 module.exports = {
   addNote: addNote,
-  getNotes: getNotes,
   listNotes: listNotes,
   removeNote: removeNote,
   readNote: readNote
