@@ -79,8 +79,10 @@ const removeNote = function (title) {
   });
 
   // if we found matches, then
-  if (notesArr.length) {
+  if (notes.length > notesArr.length) {
     saveNote(notesArr);
+  } else {
+    console.log(chalk.red.inverse("No note found matching this title!"));
   }
 };
 
