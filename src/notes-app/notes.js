@@ -1,6 +1,7 @@
 const fs = require("fs");
 const chalk = require("chalk");
 const Table = require("cli-table");
+const nodemon = require("nodemon");
 
 // read file data and return a JSON str
 const getNotes = () => {
@@ -39,11 +40,14 @@ const addNote = (title, body) => {
 
   // check if any note with same title exists?
   // if yes then collect that note in duplicateNotes array.
-  const duplicateNotes = notes.filter((note) => note.title === title);
+  //const duplicateNotes = notes.filter((note) => note.title === title);
 
-  // if duplicateNotes is having an entry
+  // more efficient way of finding whether a duplicate exists
+  const duplicateNote = notes.find((note) => note.title === title);
+
+  // if duplicateNote is having an entry
   // that means this note is a duplicate and we shouldnt save it.
-  if (duplicateNotes.length === 0) {
+  if (!duplicateNote) {
     // append new log into existing.
     notes.push({
       title: title,
