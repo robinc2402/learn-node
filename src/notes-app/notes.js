@@ -16,6 +16,7 @@ const saveNote = (obj) => {
   fs.writeFileSync("./data.json", dataStr);
 
   console.log(chalk.green.inverse("Note saved."));
+  listNotes();
   return true;
 };
 
