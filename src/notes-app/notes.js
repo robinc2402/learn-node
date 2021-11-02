@@ -81,6 +81,7 @@ const removeNote = (title) => {
 
 // read a note
 const readNote = (title) => {
+  debugger;
   const notes = loadNotes();
 
   //const notesArr = notes.filter((v) => v.title === title);
