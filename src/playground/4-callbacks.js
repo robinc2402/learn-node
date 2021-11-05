@@ -1,17 +1,35 @@
-setTimeout(() => {
-  console.log("2 seconds timer");
-}, 2000);
+// setTimeout(() => {
+//   console.log("2 seconds timer");
+// }, 2000);
 
-const geocode = (location, callback) => {
+// const geocode = (location, callback) => {
+//   setTimeout(() => {
+//     const data = {
+//       lat: 123,
+//       long: -456
+//     };
+//     callback(data);
+//   }, 2000);
+// };
+
+// geocode("Gurugram", (data) => {
+//   console.log(data);
+// });
+
+//
+// Goal: Mess around with the callback pattern
+//
+// 1. Define an add function that accepts the correct arguments
+// 2. Use setTimeout to simulate a 2 second delay
+// 3. After 2 seconds are up, call the callback function with the sum
+// 4. Test your work!
+
+const add = (a, b, callback) => {
   setTimeout(() => {
-    const data = {
-      lat: 123,
-      long: -456
-    };
-    callback(data);
+    callback(a + b);
   }, 2000);
 };
 
-geocode("Gurugram", (data) => {
-  console.log(data);
+add(19, 4, (sum) => {
+  console.log(sum); // Should print: 5
 });
