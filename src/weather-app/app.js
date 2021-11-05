@@ -5,18 +5,18 @@ const chalk = require("chalk");
 
 const location = process.argv[2];
 
-weather_report(location, (err, res) => {
+weather_report(location, (err, { body }) => {
   if (!location) {
     return console.log(chalk.red.inverse("Please provide a location."));
   } else if (err) {
     return console.log(err);
   }
-  forecast(res.body.location.lon, res.body.location.lat, (error, data) => {
+  forecast(body.location, (error, data) => {
     if (err) {
       return console.log(err);
     }
 
-    console.log(res.body.location.name);
+    console.log(body.location.name);
     console.log(data);
   });
 });

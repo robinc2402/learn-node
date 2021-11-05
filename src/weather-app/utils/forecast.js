@@ -1,31 +1,31 @@
 const request = require("postman-request");
 const geo_code = require("./geocode");
 
-const forecast = (lat, long, cb) => {
+const forecast = ({ lon, lat }, cb) => {
   const url =
     "http://api.weatherstack.com/current?access_key=8711759fff4b4c8e4743b744d0e7217c&query=" +
-    long +
+    lat +
     "," +
-    lat;
-  request({ url: url, json: true }, (err, res) => {
+    lon;
+  request({ url: url, json: true }, (err, { body }) => {
     //console.log(res.body.current);
     //console.log(res.body.error);
     //console.log(err);
     //return false;
     if (err) {
-      cb("Error connecting weather service!", res);
-    } else if (res.body.error) {
-      cb("Unable to find location! " + res.body.error.info, res);
+      cb("Error connecting weather service!", body);
+    } else if (body.error) {
+      cb("Unable to find location! " + body.error.info, body);
     } else {
       cb(
         undefined,
-        res.body.current.weather_descriptions[0] +
+        body.current.weather_descriptions[0] +
           ". It is currently " +
-          res.body.current.temperature +
+          body.current.temperature +
           " degrees. It feels like " +
-          res.body.current.feelslike +
+          body.current.feelslike +
           " degrees out. There is a " +
-          res.body.current.precip +
+          body.current.precip +
           "% chance of rain."
       );
     }
