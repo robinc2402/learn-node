@@ -20,8 +20,14 @@ const product = {
   rating: 3.2
 };
 
-const { label: pLabel, stock, rating = 10 } = product;
+// const { label: pLabel, stock, rating = 10 } = product;
 
-console.log(pLabel);
-console.log(stock);
-console.log(rating);
+// console.log(pLabel);
+// console.log(stock);
+// console.log(rating);
+
+const transaction = (type, { label, stock }) => {
+  console.log(type, label, stock);
+};
+
+transaction("order", product);
