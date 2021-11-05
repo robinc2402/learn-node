@@ -14,20 +14,15 @@ const chalk = require("chalk");
 //    - Success, pass forecast string for data (same format as from before)
 
 weather_report("Gurugram", (err, res) => {
-  console.log("Error", err);
-  console.log(
-    res.body.current.weather_descriptions[0] +
-      ". It is currently " +
-      res.body.current.temperature +
-      " degrees. It feels like " +
-      res.body.current.feelslike +
-      " degrees out. There is a " +
-      res.body.current.precip +
-      "% chance of rain."
-  );
-});
+  if (err) {
+    return console.log(err);
+  }
+  forecast(res.body.location.lon, res.body.location.lat, (error, data) => {
+    if (err) {
+      return console.log(err);
+    }
 
-forecast(-75.7088, 44.1545, (error, data) => {
-  console.log("Error", error);
-  console.log("Data", data);
+    console.log(res.body.location.name);
+    console.log(data);
+  });
 });
