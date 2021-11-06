@@ -4,19 +4,15 @@ const express = require("express");
 // initiate express
 const app = express();
 
-// defined an absolute path that will be used at all places in Express
+// define paths for Express config
 const publicDirPath = path.join(__dirname, "../public");
-
-// define a templates path (this will override the detault "views" directory path)
 const viewsPath = path.join(__dirname, "../templates");
 
-// set a setting in express object
+// Setup handlebars engine and "views" location
+app.set("view engine", "hbs");
 app.set("views", viewsPath);
 
-// set a setting in express object
-app.set("view engine", "hbs");
-
-// customise express server to pickup all static assets from the given path
+// setup static directory to serve
 app.use(express.static(publicDirPath));
 
 // render index.hbs
