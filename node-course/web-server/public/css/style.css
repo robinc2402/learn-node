@@ -30,3 +30,15 @@ header a {
   margin-right: 16px;
   text-decoration: none;
 }
+
+#error {
+  color: red;
+}
+input {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+button {
+  cursor: pointer;
+  padding: 7px;
+}

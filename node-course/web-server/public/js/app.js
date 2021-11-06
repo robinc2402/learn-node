@@ -4,13 +4,19 @@ weatherForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const location = search.value;
 
+  const errDiv = document.querySelector("#error");
+  const resDiv = document.querySelector("#forecast");
+
+  resDiv.innerHTML = "Loading...";
+
   fetch("https://fjdyu.sse.codesandbox.io/weather?address=" + location).then(
     (res) => {
+      resDiv.innerHTML = errDiv.innerHTML = "";
       res.json().then((data) => {
         if (data.error) {
-          console.log(data.error);
+          errDiv.innerHTML = data.error;
         } else {
-          console.log(data);
+          resDiv.innerHTML = data.location + ":<br>" + data.forecast;
         }
       });
     }
