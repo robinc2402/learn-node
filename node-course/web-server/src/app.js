@@ -7,6 +7,12 @@ const app = express();
 // defined an absolute path that will be used at all places in Express
 const publicDirPath = path.join(__dirname, "../public");
 
+// define a templates path (this will override the detault "views" directory path)
+const viewsPath = path.join(__dirname, "../templates");
+
+// set a setting in express object
+app.set("views", viewsPath);
+
 // set a setting in express object
 app.set("view engine", "hbs");
 
