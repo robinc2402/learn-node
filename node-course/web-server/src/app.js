@@ -1,6 +1,8 @@
 const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
+const weather_report = require("./utils/weather_report.js");
+const forecast = require("./utils/forecast.js");
 
 // initiate express
 const app = express();
@@ -74,6 +76,20 @@ app.get("/weather", (req, res) => {
       error: "Address needs to be specified to get weather details."
     });
   }
+
+  weather_report(req.query.address, (err, { body }) => {
+    if (err) {
+      return console.log(err);
+    }
+    forecast(body.location, (error, data) => {
+      if (err) {
+        return console.log(err);
+      }
+
+      console.log(body.location.name);
+      console.log(data);
+    });
+  });
 
   res.send({
     current: {
