@@ -1,5 +1,8 @@
 const express = require("express");
 
+console.log(__filename);
+console.log(__dirname);
+
 const app = express();
 
 app.get("", (req, res) => {
