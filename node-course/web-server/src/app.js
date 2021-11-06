@@ -45,6 +45,10 @@ app.get("/help", (req, res) => {
   });
 });
 
+app.get("/help/*", (req, res) => {
+  res.send("Help article not found!");
+});
+
 // fallback route (it works in case there was no match found above)
 app.get("*", (req, res) => {
   res.send("My 404 page!");
