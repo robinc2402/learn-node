@@ -1,11 +1,11 @@
 const request = require("postman-request");
 
-const forecast = ({ lon, lat }, callback) => {
+const forecast = (lon, lat, callback) => {
   const url =
-    "http://api.weatherstack.com/current?access_key=8711759fff4b4c8e4743b744d0e7217c&query=" +
-    lat +
+    "http://api.weatherstack.com/current?access_key=cf5149980c3a703608488f172b49dab1&query=" +
+    lon +
     "," +
-    lon;
+    lat;
 
   request({ url, json: true }, (error, { body }) => {
     if (error) {
@@ -15,10 +15,7 @@ const forecast = ({ lon, lat }, callback) => {
     } else {
       callback(
         undefined,
-        "Weather forecast for - " +
-          body.location.name +
-          ". " +
-          body.current.weather_descriptions[0] +
+        body.current.weather_descriptions[0] +
           ". It is currently " +
           body.current.temperature +
           " degrees. It feels like " +
