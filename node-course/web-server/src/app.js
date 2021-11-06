@@ -45,6 +45,7 @@ app.get("/help", (req, res) => {
   });
 });
 
+// add a 404 route that matches the given URL expression
 app.get("/help/*", (req, res) => {
   res.render("404", {
     title: "Help page",
