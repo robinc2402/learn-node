@@ -45,6 +45,19 @@ app.get("/help", (req, res) => {
   });
 });
 
+app.get("/products", (req, res) => {
+  // check if there is no "search" URL param sent
+  if (!req.query.search) {
+    return res.send({
+      error: "A search term must be provided."
+    });
+  }
+
+  res.send({
+    products: []
+  });
+});
+
 // add a 404 route that matches the given URL expression
 app.get("/help/*", (req, res) => {
   res.render("404", {
