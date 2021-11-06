@@ -79,40 +79,17 @@ app.get("/weather", (req, res) => {
 
   weather_report(req.query.address, (err, { body }) => {
     if (err) {
-      return console.log(err);
+      return res.send(err);
     }
     forecast(body.location, (error, data) => {
       if (err) {
-        return console.log(err);
+        return res.send(err);
       }
 
-      console.log(body.location.name);
-      console.log(data);
-    });
-  });
+      data.location = body.location.name;
 
-  res.send({
-    current: {
-      region: req.query.address,
-      observation_time: "07:35 PM",
-      temperature: 14,
-      weather_code: 116,
-      weather_icons: [
-        "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0002_sunny_intervals.png"
-      ],
-      weather_descriptions: ["Partly cloudy"],
-      wind_speed: 9,
-      wind_degree: 220,
-      wind_dir: "SW",
-      pressure: 1020,
-      precip: 0,
-      humidity: 75,
-      cloudcover: 75,
-      feelslike: 14,
-      uv_index: 3,
-      visibility: 16,
-      is_day: "yes"
-    }
+      return res.send(data);
+    });
   });
 });
 

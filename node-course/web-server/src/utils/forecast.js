@@ -1,5 +1,4 @@
 const request = require("postman-request");
-const geo_code = require("./geocode");
 
 const forecast = ({ lon, lat }, cb) => {
   const url =
@@ -19,7 +18,10 @@ const forecast = ({ lon, lat }, cb) => {
     } else {
       cb(
         undefined,
-        body.current.weather_descriptions[0] +
+        "Weather forecast for - " +
+          body.location.name +
+          ". " +
+          body.current.weather_descriptions[0] +
           ". It is currently " +
           body.current.temperature +
           " degrees. It feels like " +
