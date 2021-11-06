@@ -45,26 +45,14 @@ app.get("/help", (req, res) => {
   });
 });
 
+// fallback route (it works in case there was no match found above)
+app.get("*", (req, res) => {
+  res.send("My 404 page!");
+});
+
 // capture the URL and send the response
 app.get("/weather", (req, res) => {
   res.send({
-    request: {
-      type: "LatLon",
-      query: "Lat 37.83 and Lon -122.42",
-      language: "en",
-      unit: "m"
-    },
-    location: {
-      name: "North Beach",
-      country: "United States of America",
-      region: "California",
-      lat: "37.806",
-      lon: "-122.411",
-      timezone_id: "America/Los_Angeles",
-      localtime: "2021-11-05 12:35",
-      localtime_epoch: 1636115700,
-      utc_offset: "-7.0"
-    },
     current: {
       observation_time: "07:35 PM",
       temperature: 14,
