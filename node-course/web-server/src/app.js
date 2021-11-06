@@ -1,10 +1,23 @@
 const path = require("path");
 const express = require("express");
+
+// initiate express
 const app = express();
+
+// defined an absolute path that will be used at all places in Express
 const publicDirPath = path.join(__dirname, "../public");
 
+// set a setting in express object
+app.set("view engine", "hbs");
+
+// customise express server to pickup all static assets from the given path
 app.use(express.static(publicDirPath));
 
+app.get("", (req, res) => {
+  res.render("index");
+});
+
+// capture the URL and send the response
 app.get("/weather", (req, res) => {
   res.send({
     request: {
