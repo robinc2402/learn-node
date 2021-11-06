@@ -1,11 +1,18 @@
-fetch("https://fjdyu.sse.codesandbox.io/weather?address=Gurugram").then(
-  (res) => {
-    res.json().then((data) => {
-      if (data.error) {
-        console.log(data.error);
-      } else {
-        console.log(data);
-      }
-    });
-  }
-);
+const weatherForm = document.querySelector("form");
+const search = document.querySelector("input");
+weatherForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const location = search.value;
+
+  fetch("https://fjdyu.sse.codesandbox.io/weather?address=" + location).then(
+    (res) => {
+      res.json().then((data) => {
+        if (data.error) {
+          console.log(data.error);
+        } else {
+          console.log(data);
+        }
+      });
+    }
+  );
+});
