@@ -67,19 +67,17 @@ app.get("/help/*", (req, res) => {
   });
 });
 
-// fallback route (it works in case there was no match found above)
-app.get("*", (req, res) => {
-  res.render("404", {
-    message: "My 404 page!",
-    title: "Help page",
-    name: "Robin Chalia"
-  });
-});
-
 // capture the URL and send the response
 app.get("/weather", (req, res) => {
+  if (!req.query.address) {
+    return res.send({
+      error: "Address needs to be specified to get weather details."
+    });
+  }
+
   res.send({
     current: {
+      region: req.query.address,
       observation_time: "07:35 PM",
       temperature: 14,
       weather_code: 116,
@@ -99,6 +97,15 @@ app.get("/weather", (req, res) => {
       visibility: 16,
       is_day: "yes"
     }
+  });
+});
+
+// fallback route (it works in case there was no match found above)
+app.get("*", (req, res) => {
+  res.render("404", {
+    message: "My 404 page!",
+    title: "Help page",
+    name: "Robin Chalia"
   });
 });
 
