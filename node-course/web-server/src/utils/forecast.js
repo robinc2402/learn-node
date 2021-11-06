@@ -1,24 +1,21 @@
 const request = require("postman-request");
 
-const forecast = ({ lon, lat }, cb) => {
+const forecast = ({ lon, lat }, callback) => {
   const url =
-    "http://api.weatherstack.com/current?access_key=8711759fff4b4c8e4743b744d0e7217c&query=" +
-    lat +
-    "," +
-    lon;
-  request({ url: url, json: true }, (err, { body }) => {
-    //console.log(res.body.current);
-    //console.log(res.body.error);
-    //console.log(err);
-    //return false;
-    if (err) {
-      cb("Error connecting weather service!", body);
+      "http://api.weatherstack.com/current?access_key=8711759fff4b4c8e4743b744d0e7217c&query=" +
+      lat +
+      "," +
+      lon;
+
+  request({ url, json: true }, (error, { body }) => {
+    if (error) {
+      callback("Unable to connect to weather service!", undefined);
     } else if (body.error) {
-      cb("Unable to find location! " + body.error.info, body);
+      callback("Unable to find location", undefined);
     } else {
-      cb(
-        undefined,
-        "Weather forecast for - " +
+      callback(
+          undefined,
+          "Weather forecast for - " +
           body.location.name +
           ". " +
           body.current.weather_descriptions[0] +

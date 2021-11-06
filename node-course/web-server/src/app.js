@@ -1,12 +1,11 @@
 const path = require("path");
 const express = require("express");
 const hbs = require("hbs");
-const weather_report = require("./utils/weather_report.js");
+const geocode = require("./utils/weather_report.js");
 const forecast = require("./utils/forecast.js");
 
 // initiate express
 const app = express();
-debugger;
 // define paths for Express config
 const publicDirPath = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
@@ -71,26 +70,33 @@ app.get("/help/*", (req, res) => {
 
 // capture the URL and send the response
 app.get("/weather", (req, res) => {
+
   if (!req.query.address) {
     return res.send({
       error: "Address needs to be specified to get weather details."
     });
   }
 
-  weather_report(req.query.address, (err, { body }) => {
-    if (err) {
-      return res.send(err);
-    }
-    forecast(body.location, (error, data) => {
-      if (err) {
-        return res.send(err);
+  geocode(
+      req.query.address,
+      (error, { latitude, longitude, location } = {}) => {
+        if (error) {
+          return res.send({ error });
+        }
+
+        forecast(latitude, longitude, (error, forecastData) => {
+          if (error) {
+            return res.send({ error });
+          }
+
+          res.send({
+            forecast: forecastData,
+            location,
+            address: req.query.address
+          });
+        });
       }
-
-      data.location = body.location.name;
-
-      return res.send(data);
-    });
-  });
+  );
 });
 
 // fallback route (it works in case there was no match found above)
