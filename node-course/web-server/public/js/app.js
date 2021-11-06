@@ -1,5 +1,6 @@
 const weatherForm = document.querySelector("form");
 const search = document.querySelector("input");
+
 weatherForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const location = search.value;
@@ -9,7 +10,7 @@ weatherForm.addEventListener("submit", (e) => {
 
   resDiv.innerHTML = "Loading...";
 
-  fetch("https://fjdyu.sse.codesandbox.io/weather?address=" + location).then(
+  fetch("/weather?address=" + location).then(
     (res) => {
       resDiv.innerHTML = errDiv.innerHTML = "";
       res.json().then((data) => {
