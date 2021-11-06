@@ -13,8 +13,31 @@ app.set("view engine", "hbs");
 // customise express server to pickup all static assets from the given path
 app.use(express.static(publicDirPath));
 
+// render index.hbs
+// also send few variables to the page
 app.get("", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    title: "Weather App",
+    name: "Robin Chalia"
+  });
+});
+
+// render about.hbs
+// also send few variables to the page
+app.get("/about", (req, res) => {
+  res.render("about", {
+    title: "About me",
+    name: "Robin Chalia"
+  });
+});
+
+// render help.hbs
+// also send few variables to the page
+app.get("/help", (req, res) => {
+  res.render("help", {
+    title: "Help page",
+    name: "Robin Chalia"
+  });
 });
 
 // capture the URL and send the response
