@@ -12,7 +12,6 @@ const get_coords = (location, cb) => {
     } else if (!("features" in res.body) || !res.body.features.length) {
       cb("Unabled to find location!", res);
     }
-
     cb(undefined, res);
   });
 };
@@ -24,11 +23,10 @@ const weather_report = (location, cb) => {
     const long = body.features[0].center[0];
 
     const url =
-      "http://api.weatherstack.com/current?access_key=8711759fff4b4c8e4743b744d0e7217c&query=" +
+      "http://api.weatherstack.com/current?access_key=cf5149980c3a703608488f172b49dab1&query=" +
       lat +
       "," +
       long;
-
     request({ url: url, json: true }, (err, res) => {
       if (err) {
         cb("Error connecting weather service!", res);
