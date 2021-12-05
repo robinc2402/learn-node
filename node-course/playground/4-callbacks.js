@@ -1,20 +1,16 @@
 const doWorkCallback = (callback) => {
-setTimeout(()=>{
-  // callback('This is my error', undefined)
-  callback(undefined, [1,4,3])
-}, 2000)
+  setTimeout(()=>{
+    // callback('This is my error', undefined)
+    callback(undefined, [1,4,3])
+  }, 2000)
 }
 
 doWorkCallback((err, res)=>{
   if(err){
     return console.log(err);
   }
-
   console.log(res)
-
 });
-
-
 
 // setTimeout(() => {
 //   console.log("2 seconds timer");
