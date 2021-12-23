@@ -1,6 +1,9 @@
 const add = (a, b) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
+      if (a < 0 || b < 0) {
+        return reject("Numbers must be positive");
+      }
       resolve(a + b);
     }, 2000);
   });
@@ -8,9 +11,9 @@ const add = (a, b) => {
 
 const doWork = async () => {
   // return "test";
-  const sum1 = await add(5, 9);
+  const sum1 = await add(5, -9);
   const sum2 = await add(sum1, 9);
-  return await add(sum2, 9);
+  return await add(sum2, 3);
 };
 
 // Async functions always return a Promise
@@ -24,5 +27,5 @@ doWork()
     console.log(res);
   })
   .catch((e) => {
-    console.log(e);
+    console.log("e", e);
   });
